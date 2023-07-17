@@ -707,6 +707,7 @@ function OrionLib:MakeWindow(WindowConfig)
             local button1 = gui1.Frame:WaitForChild("TextButton")
 
             local function onClick()
+                button1.Parent.Visible = false
                 MainWindow.Visible = true
             end
             button1.MouseButton1Click:Connect(onClick)
