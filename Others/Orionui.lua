@@ -516,7 +516,7 @@ function OrionLib:MakeWindow(WindowConfig)
         TabHolder.CanvasSize = UDim2.new(0, 0, 0, TabHolder.UIListLayout.AbsoluteContentSize.Y + 16)
     end)
 
-    local CloseBtn = SetChildren(SetProps(MakeElement("Button"), {
+    CloseBtn = SetChildren(SetProps(MakeElement("Button"), {
         Size = UDim2.new(0.5, 0, 1, 0),
         Position = UDim2.new(0.5, 0, 0, 0),
         BackgroundTransparency = 1
@@ -666,9 +666,57 @@ function OrionLib:MakeWindow(WindowConfig)
 
     MakeDraggable(DragPoint, MainWindow)
 
+    function MinimizedIcon()
+        local buttonKinghub = game:GetService("CoreGui"):FindFirstChild("OpenHub")
+
+        if buttonKinghub then
+            buttonKinghub.Frame.Visible = true
+        else
+            local player = game.Players.LocalPlayer
+            local coreGui = game:GetService("CoreGui")
+
+            local gui = Instance.new("ScreenGui")
+            gui.Name = "OpenHub"
+            gui.Parent = coreGui
+
+            local circle = Instance.new("Frame")
+            circle.Size = UDim2.new(0, 50, 0, 50)
+            circle.Position = UDim2.new(0.5, 0, 0, 40)
+            circle.AnchorPoint = Vector2.new(0.5, 0)
+            circle.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
+            circle.BorderSizePixel = 1
+            circle.BorderColor3 = Color3.new(0, 0, 0)
+            circle.Parent = gui
+
+            local uiCorner = Instance.new("UICorner")
+            uiCorner.CornerRadius = UDim.new(1, 0)
+            uiCorner.Parent = circle
+
+            local button = Instance.new("TextButton")
+            button.Size = UDim2.new(1, 0, 1, 0)
+            button.BackgroundTransparency = 1
+            button.Text = "King Hub"
+            button.TextColor3 = Color3.new(1, 1, 1)
+            button.Font = Enum.Font.SourceSansBold
+            button.TextSize = 12
+            button.Parent = circle
+
+            wait(2)
+
+            local gui1 = game:GetService("CoreGui"):WaitForChild("OpenHub")
+            local button1 = gui1.Frame:WaitForChild("TextButton")
+
+            local function onClick()
+                MainWindow.Visible = false
+            end
+            button1.MouseButton1Click:Connect(onClick)
+        end
+    end
+
     AddConnection(CloseBtn.MouseButton1Up, function()
         MainWindow.Visible = false
         UIHidden = true
+        MinimizedIcon()
         WindowConfig.CloseCallback()
     end)
 
