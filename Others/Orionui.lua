@@ -45,6 +45,12 @@ local function GetIcon(IconName)
     end
 end
 
+local deletebutton = game:GetService("CoreGui"):FindFirstChild("OpenHub")
+
+if deletebutton then
+    deletebutton:destroy()
+end
+
 local Orion = Instance.new("ScreenGui")
 Orion.Name = "Orion"
 if syn then
