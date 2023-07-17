@@ -50,11 +50,11 @@ Orion.Name = "Orion"
 if syn then
     syn.protect_gui(Orion)
     Orion.Parent = game.CoreGui
-    --[[else
-    Orion.Parent = gethui() or game.CoreGui--]]
+else
+    Orion.Parent = gethui() or game.CoreGui
 end
 
---[[if gethui then
+if gethui then
     for _, Interface in ipairs(gethui():GetChildren()) do
         if Interface.Name == Orion.Name and Interface ~= Orion then
             Interface:Destroy()
@@ -66,7 +66,7 @@ else
             Interface:Destroy()
         end
     end
-end--]]
+end
 
 function OrionLib:IsRunning()
     if gethui then
